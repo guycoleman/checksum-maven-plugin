@@ -1,6 +1,6 @@
-/**
+/*
  * checksum-maven-plugin - http://checksum-maven-plugin.nicoulaj.net
- * Copyright © 2010-2016 checksum-maven-plugin contributors
+ * Copyright © 2010-2017 checksum-maven-plugin contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -137,7 +137,49 @@ public interface Execution
     void removeTarget( ExecutionTarget target );
 
     /**
-     * Check that an execution can be run with the {#run} method.
+     * Execution should fail if no file has been added.
+     *
+     * @return {@code true} if execution should fail if no file has been added
+     */
+    boolean isFailIfNoFiles();
+
+    /**
+     * Execution should fail if no file has been added.
+
+     * @param failIfNoFiles {@code true} if execution should fail if no file has been added
+     */
+    void setFailIfNoFiles(boolean failIfNoFiles);
+
+    /**
+     * Execution should fail if no algorithm has been added.
+     *
+     * @return {@code true} if execution should fail if no algorithm has been added
+     */
+    boolean isFailIfNoAlgorithms();
+
+    /**
+     * Execution should fail if no algorithm has been added.
+
+     * @param failIfNoAlgorithms {@code true} if execution should fail if no algorithm has been added
+     */
+    void setFailIfNoAlgorithms(boolean failIfNoAlgorithms);
+
+    /**
+     * Execution should fail if no target has been added.
+     *
+     * @return {@code true} if execution should fail if no target has been added
+     */
+    boolean isFailIfNoTargets();
+
+    /**
+     * Execution should fail if no target has been added.
+
+     * @param failIfNoTargets {@code true} if execution should fail if no target has been added
+     */
+    void setFailIfNoTargets(boolean failIfNoTargets);
+
+    /**
+     * Check that an execution can be run with the {@link #run()} method.
      *
      * @throws ExecutionException if some parameters are not initialized or invalid.
      */

@@ -1,6 +1,6 @@
 /**
  * checksum-maven-plugin - http://checksum-maven-plugin.nicoulaj.net
- * Copyright © 2010-2016 checksum-maven-plugin contributors
+ * Copyright © 2010-2017 checksum-maven-plugin contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 import net.nicoulaj.maven.plugins.checksum.test.integration.PostBuildScriptHelper
 
 try
@@ -22,11 +21,17 @@ try
   // Instantiate a helper.
   PostBuildScriptHelper helper = new PostBuildScriptHelper( basedir, localRepositoryPath, context )
 
+  // Fail if there are warnings
+  helper.assertBuildLogDoesNotContain('[WARNING]')
+
   // Fail if no traces of checksum-maven-plugin invocation.
   helper.assertBuildLogContains( "checksum-maven-plugin" );
 
-  // Look for the right log message.
-  helper.assertBuildLogContains( "[ERROR] No file to process." );
+  // Check files have been created and are not empty.
+  helper.assertFileIsNotEmpty( "module1/target/multi-module.artifacts.default.module1-1.0-SNAPSHOT.jar.md5" )
+  helper.assertFileIsNotEmpty( "module1/target/multi-module.artifacts.default.module1-1.0-SNAPSHOT.jar.sha1" )
+  helper.assertFileIsNotEmpty( "module2/target/multi-module.artifacts.default.module2-1.0-SNAPSHOT.jar.md5" )
+  helper.assertFileIsNotEmpty( "module2/target/multi-module.artifacts.default.module2-1.0-SNAPSHOT.jar.sha1" )
 
 }
 catch ( Exception e )

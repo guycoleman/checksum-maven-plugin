@@ -1,6 +1,6 @@
-/**
+/*
  * checksum-maven-plugin - http://checksum-maven-plugin.nicoulaj.net
- * Copyright © 2010-2016 checksum-maven-plugin contributors
+ * Copyright © 2010-2017 checksum-maven-plugin contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -111,20 +111,27 @@ public class ArtifactsMojo
      */
     @Parameter( defaultValue = "artifacts-checksums.sha" )
     protected String shasumSummaryFile;
-    
+
     /**
      * Append the artifact filename in the generated checksum file.
      * This parameter require the parameter individualFiles be equal to true.
-     * 
-     * @see #individualFiles 
+     *
+     * @see #individualFiles
      * @since 1.4
      */
     @Parameter (defaultValue = "false")
     protected boolean appendFilename;
 
     /**
+     * Constructor.
+     */
+    public ArtifactsMojo() {
+        super(false, true, true);
+    }
+
+    /**
      * Build the list of files from which digests should be generated.
-     * 
+     *
      * <p>The list is composed of the project main and attached artifacts.</p>
      *
      * @return the list of files that should be processed.
@@ -157,7 +164,7 @@ public class ArtifactsMojo
 
     /**
      * Decide whether the artifact file should be processed.
-     * 
+     *
      * <p>Excludes the project POM file and any file outside the build directory, because this could lead to writing
      * files on the user local repository for example.</p>
      *
@@ -195,7 +202,7 @@ public class ArtifactsMojo
     {
         return individualFilesOutputDirectory;
     }
-    
+
     /**
      * {@inheritDoc}
      */

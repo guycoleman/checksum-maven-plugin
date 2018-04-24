@@ -1,6 +1,6 @@
 /**
  * checksum-maven-plugin - http://checksum-maven-plugin.nicoulaj.net
- * Copyright © 2010-2016 checksum-maven-plugin contributors
+ * Copyright © 2010-2017 checksum-maven-plugin contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 import net.nicoulaj.maven.plugins.checksum.Constants
 import net.nicoulaj.maven.plugins.checksum.test.integration.PostBuildScriptHelper
 
@@ -22,6 +21,10 @@ try
 {
   // Instantiate a helper.
   PostBuildScriptHelper helper = new PostBuildScriptHelper( basedir, localRepositoryPath, context )
+
+  // Fail if there are warnings
+  helper.assertBuildLogDoesNotContain('[WARNING]')
+  helper.assertBuildLogDoesNotContain('[ERROR]')
 
   // Fail if no traces of checksum-maven-plugin invocation.
   helper.assertBuildLogContains( "checksum-maven-plugin" );
@@ -38,9 +41,6 @@ try
 
   // Check there are traces of each file.
   helper.assertFileContains( summaryFile, "attached-artifacts.artifacts.csv-summary-file-1.0-SNAPSHOT.jar" )
-  helper.assertFileContains( summaryFile, "attached-artifacts.artifacts.csv-summary-file-1.0-SNAPSHOT-bin.tar.bz2" )
-  helper.assertFileContains( summaryFile, "attached-artifacts.artifacts.csv-summary-file-1.0-SNAPSHOT-bin.tar.gz" )
-  helper.assertFileContains( summaryFile, "attached-artifacts.artifacts.csv-summary-file-1.0-SNAPSHOT-bin.zip" )
   helper.assertFileContains( summaryFile, "attached-artifacts.artifacts.csv-summary-file-1.0-SNAPSHOT-src.tar.bz2" )
   helper.assertFileContains( summaryFile, "attached-artifacts.artifacts.csv-summary-file-1.0-SNAPSHOT-src.tar.gz" )
   helper.assertFileContains( summaryFile, "attached-artifacts.artifacts.csv-summary-file-1.0-SNAPSHOT-src.zip" )

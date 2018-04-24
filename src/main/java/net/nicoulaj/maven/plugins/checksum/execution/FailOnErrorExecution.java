@@ -1,6 +1,6 @@
-/**
+/*
  * checksum-maven-plugin - http://checksum-maven-plugin.nicoulaj.net
- * Copyright © 2010-2016 checksum-maven-plugin contributors
+ * Copyright © 2010-2017 checksum-maven-plugin contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -61,7 +61,7 @@ public class FailOnErrorExecution
         }
 
         // Process files.
-        for ( ChecksumFile file : files )
+        for ( ChecksumFile file : getFiles() )
         {
             for ( String algorithm : getAlgorithms() )
             {
